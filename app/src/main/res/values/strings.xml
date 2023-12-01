@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">Capstone-RapidResQ</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
+    <string name="title_activity_maps">MapsActivity</string>
+    <string name="password_alert">Password tidak boleh kurang dari 8</string>
+</resources>
