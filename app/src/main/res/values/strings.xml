@@ -5,4 +5,10 @@
     <string name="title_notifications">Notifications</string>
     <string name="title_activity_maps">MapsActivity</string>
     <string name="password_alert">Password tidak boleh kurang dari 8</string>
+    <string name="login">Login</string>
+    <string name="password">Password</string>
+    <string name="email">Email</string>
+    <string name="message_login">Belum punya akun?</string>
+    <string name="title_login">Login disini</string>
+    <string name="to_register">Register</string>
 </resources>
