@@ -11,4 +11,7 @@
     <string name="message_login">Belum punya akun?</string>
     <string name="title_login">Login disini</string>
     <string name="to_register">Register</string>
+    <string name="title_register">Registrasi Akun</string>
+    <string name="name">Nama</string>
+    <string name="register">Register</string>
 </resources>
