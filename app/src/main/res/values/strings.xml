@@ -2,7 +2,6 @@
     <string name="app_name">Capstone-RapidResQ</string>
     <string name="title_home">Home</string>
     <string name="title_dashboard">Dashboard</string>
-    <string name="title_notifications">Notifications</string>
     <string name="title_activity_maps">MapsActivity</string>
     <string name="password_alert">Password tidak boleh kurang dari 8</string>
     <string name="login">Login</string>
@@ -14,4 +13,10 @@
     <string name="title_register">Registrasi Akun</string>
     <string name="name">Nama</string>
     <string name="register">Register</string>
+    <string name="title_profile">Profile</string>
+    <string name="birt_date">Tanggal Lahir</string>
+    <string name="address">Alamat</string>
+    <string name="update">Perbarui Data</string>
+    <string name="phone_number">Nomor Telpon</string>
+    <string name="title_add">Upload</string>
 </resources>
