@@ -48,6 +48,7 @@
             android:background="@drawable/bg_button_disable"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
+            android:apiKey=""
             app:layout_constraintTop_toBottomOf="@+id/search_bar"
             tools:ignore="MissingConstraints" />
 
