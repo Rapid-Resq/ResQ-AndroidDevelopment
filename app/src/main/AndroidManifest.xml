@@ -23,6 +23,12 @@
         android:theme="@style/Theme.CapstoneRapidResQ"
         tools:targetApi="31">
         <activity
+            android:name=".ui.splashScreen.SplashScreenActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.add.CameraActivity"
+            android:exported="false" />
+        <activity
             android:name=".ui.updateProfile.UpdateProfileDataActivity"
             android:exported="false" />
         <!--

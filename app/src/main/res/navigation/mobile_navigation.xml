@@ -12,10 +12,16 @@
         tools:layout="@layout/fragment_home" />
 
     <fragment
-        android:id="@+id/navigation_dashboard"
-        android:name="com.kai.capstone_rapidresq.ui.dashboard.DashboardFragment"
-        android:label="@string/title_dashboard"
-        tools:layout="@layout/fragment_dashboard" />
+        android:id="@+id/navigation_add"
+        android:name="com.kai.capstone_rapidresq.ui.add.AddFragment"
+        android:label="@string/title_add"
+        tools:layout="@layout/fragment_add" />
+
+    <fragment
+        android:id="@+id/navigation_article"
+        android:name="com.kai.capstone_rapidresq.ui.article.ArticleFragment"
+        android:label="@string/article"
+        tools:layout="@layout/fragment_article"/>
 
     <fragment
         android:id="@+id/navigation_profile"

@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     tools:context=".ui.updateProfile.UpdateProfileDataActivity">
 
+
     <ImageView
         android:id="@+id/iv_profile"
         android:layout_width="100dp"
@@ -27,7 +28,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
         android:layout_marginEnd="32dp"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="20dp"
         android:alpha="0"
         android:hint="@string/name"
         app:layout_constraintEnd_toEndOf="parent"

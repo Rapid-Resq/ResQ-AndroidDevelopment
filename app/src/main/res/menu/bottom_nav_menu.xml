@@ -12,6 +12,11 @@
         android:title="@string/title_add" />
 
     <item
+        android:id="@+id/navigation_article"
+        android:icon="@drawable/ic_baseline_article_24"
+        android:title="@string/article"/>
+
+    <item
         android:id="@+id/navigation_profile"
         android:icon="@drawable/ic_baseline_person_24_nav"
         android:title="@string/title_profile" />

@@ -30,20 +30,20 @@ class ProfileFragment : Fragment() {
 
         // Contoh data profil
         val userName = "kai"
-        val userEmail = "john.doe@example.com"
-        val address = "example"
-        val bDay = "example"
-        val number = "example"
+        val userEmail = "kai.doe@example.com"
+        val address = "Yogya"
+        val bDay = "march 29"
+        val number = "911"
 
         // Set data profil ke tampilan
-        binding.tvName.text = userName
-        binding.tvEmail.text = userEmail
-        binding.tvAddress.text = address
-        binding.tvBirthDate.text = bDay
-        binding.tvPhoneNumber.text = number
-        binding.btnUpdate.setOnClickListener {
-            showToast("button clicked")
-        }
+//        binding.tvName.text = userName
+//        binding.tvEmail.text = userEmail
+//        binding.tvAddress.text = address
+//        binding.tvBirthDate.text = bDay
+//        binding.tvPhoneNumber.text = number
+//        binding.btnUpdate.setOnClickListener {
+//            showToast("button clicked")
+//        }
     }
 
     private fun showToast(message: String) {
