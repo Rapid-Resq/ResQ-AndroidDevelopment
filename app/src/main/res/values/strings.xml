@@ -29,4 +29,5 @@
     <string name="male">Laki-Laki</string>
     <string name="female">Perempuan</string>
     <string name="bpjs">No BPJS</string>
+    <string name="safeState">Tingkat rawan kecelakaan pada region ini :</string>
 </resources>

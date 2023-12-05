@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     tools:context=".ui.home.HomeFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -44,10 +44,10 @@
             android:layout_marginStart="10dp"
             android:layout_marginTop="10dp"
             android:layout_marginEnd="10dp"
+            android:apiKey=""
             android:background="@drawable/bg_button_disable"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            android:apiKey=""
             app:layout_constraintTop_toBottomOf="@+id/search_bar"
             tools:ignore="MissingConstraints" />
 
@@ -80,40 +80,88 @@
             app:layout_constraintStart_toEndOf="@+id/location"
             app:layout_constraintTop_toBottomOf="@+id/mapsView" />
 
-        <TextView
-            android:id="@+id/tv_information"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginEnd="10dp"
-            android:layout_marginBottom="20dp"
-            android:background="@drawable/textview_border"
-            android:gravity="center"
-            android:hint="@string/safeness"
-            android:textSize="18sp"
-            app:layout_constraintBottom_toTopOf="@+id/tv_information2"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cardViewInformation"
+            android:layout_width="match_parent"
             app:layout_constraintTop_toBottomOf="@+id/location"
-            tools:ignore="MissingConstraints" />
-        <TextView
-            android:id="@+id/tv_information2"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginEnd="10dp"
-            android:layout_marginBottom="20dp"
-            android:background="@drawable/textview_border"
-            android:gravity="center"
-            android:hint="@string/safeness"
-            android:textSize="18sp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/location"
-            tools:ignore="MissingConstraints" />
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            tools:ignore="MissingConstraints">
+
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_margin="10dp"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/notation_safeness"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginEnd="10dp"
+                    android:background="@drawable/textview_border"
+                    android:text="@string/safeState"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintBottom_toTopOf="@+id/detail_safeness"
+                    android:textAlignment="center" />
+
+                <TextView
+                    android:id="@+id/detail_safeness"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginStart="10dp"
+                    android:textAlignment="center"
+                    android:layout_marginEnd="10dp"
+                    android:layout_marginBottom="10dp"
+                    android:background="@drawable/textview_border"
+                    app:layout_constraintTop_toBottomOf="@+id/notation_safeness"
+                    android:text="@string/safeness" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+<!--            <TextView-->
+<!--                android:id="@+id/tv_information"-->
+<!--                android:layout_width="0dp"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_marginStart="10dp"-->
+<!--                android:layout_marginTop="10dp"-->
+<!--                android:layout_marginEnd="10dp"-->
+<!--                android:layout_marginBottom="20dp"-->
+<!--                android:background="@drawable/textview_border"-->
+<!--                android:gravity="center"-->
+<!--                android:hint="@string/safeness"-->
+<!--                android:textSize="18sp"-->
+<!--                app:layout_constraintBottom_toBottomOf="parent"-->
+<!--                app:layout_constraintEnd_toEndOf="parent"-->
+<!--                app:layout_constraintStart_toStartOf="parent"-->
+<!--                app:layout_constraintTop_toBottomOf="@+id/location"-->
+<!--                tools:ignore="MissingConstraints" />-->
+        </androidx.cardview.widget.CardView>
+
+
+        <!--        <TextView-->
+        <!--            android:id="@+id/tv_information2"-->
+        <!--            android:layout_width="0dp"-->
+        <!--            android:layout_height="wrap_content"-->
+        <!--            android:layout_marginStart="10dp"-->
+        <!--            android:layout_marginTop="10dp"-->
+        <!--            android:layout_marginEnd="10dp"-->
+        <!--            android:layout_marginBottom="20dp"-->
+        <!--            android:background="@drawable/textview_border"-->
+        <!--            android:gravity="center"-->
+        <!--            android:hint="@string/safeness"-->
+        <!--            android:textSize="18sp"-->
+        <!--            app:layout_constraintBottom_toBottomOf="parent"-->
+        <!--            app:layout_constraintEnd_toEndOf="parent"-->
+        <!--            app:layout_constraintStart_toStartOf="parent"-->
+        <!--            app:layout_constraintTop_toBottomOf="@+id/location"-->
+        <!--            tools:ignore="MissingConstraints" />-->
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
