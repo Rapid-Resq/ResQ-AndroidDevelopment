@@ -30,4 +30,8 @@
     <string name="female">Perempuan</string>
     <string name="bpjs">No BPJS</string>
     <string name="safeState">Tingkat rawan kecelakaan pada region ini :</string>
+    <string name="normal_type">Normal Maps</string>
+    <string name="satellite_type">Satellite Maps</string>
+    <string name="terrain_type">Terrain Maps</string>
+    <string name="hybrid_type">Hybrid Maps</string>
 </resources>

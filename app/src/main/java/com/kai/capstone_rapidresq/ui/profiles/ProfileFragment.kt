@@ -1,5 +1,6 @@
 package com.kai.capstone_rapidresq.ui.profiles
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -7,6 +8,8 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.kai.capstone_rapidresq.databinding.FragmentProfileBinding
+import com.kai.capstone_rapidresq.ui.maps.MapsActivity
+import com.kai.capstone_rapidresq.ui.updateProfile.UpdateProfileDataActivity
 
 class ProfileFragment : Fragment() {
 
@@ -22,30 +25,20 @@ class ProfileFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentProfileBinding.inflate(inflater, container, false)
-        return binding.root
+        return binding!!.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        // Contoh data profil
-        val userName = "kai"
-        val userEmail = "kai.doe@example.com"
-        val address = "Yogya"
-        val bDay = "march 29"
-        val number = "911"
-
-        // Set data profil ke tampilan
-//        binding.tvName.text = userName
-//        binding.tvEmail.text = userEmail
-//        binding.tvAddress.text = address
-//        binding.tvBirthDate.text = bDay
-//        binding.tvPhoneNumber.text = number
-//        binding.btnUpdate.setOnClickListener {
-//            showToast("button clicked")
-//        }
+        binding?.btnUpdate?.setOnClickListener{
+            navigateToUpdateDataProfile()
+        }
     }
-
+    private fun navigateToUpdateDataProfile(){
+        val intent = Intent(activity, UpdateProfileDataActivity::class.java)
+        startActivity(intent)
+    }
     private fun showToast(message: String) {
         // Membuat dan menampilkan Toast dengan pesan yang diberikan
         Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
