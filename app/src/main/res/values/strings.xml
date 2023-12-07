@@ -34,4 +34,8 @@
     <string name="satellite_type">Satellite Maps</string>
     <string name="terrain_type">Terrain Maps</string>
     <string name="hybrid_type">Hybrid Maps</string>
+    <string name="updateData">Update</string>
+    <string name="work">Pekerjaan</string>
+    <string name="noKtp">Nomor KTP</string>
+    <string name="gender">Jenis Kelamin</string>
 </resources>
