@@ -33,149 +33,200 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <TextView
-                android:id="@+id/tv_name"
-                android:layout_width="0dp"
-                android:layout_height="50dp"
-                android:layout_marginStart="20dp"
-                android:layout_marginTop="20dp"
-                android:layout_marginEnd="20dp"
-                android:background="@drawable/textview_border"
-                android:gravity="center"
-                android:hint="@string/name"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/iv_profile"
-                tools:alpha="100"
-                tools:ignore="MissingConstraints" />
 
-            <TextView
-                android:id="@+id/tv_birth_date"
-                android:layout_width="0dp"
-                android:layout_height="50dp"
-                android:layout_marginStart="20dp"
-                android:layout_marginTop="20dp"
-                android:layout_marginEnd="20dp"
-                android:background="@drawable/textview_border"
-                android:gravity="center"
-                android:hint="@string/birt_date"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tv_name"
-                tools:alpha="100"
-                tools:ignore="MissingConstraints" />
+            <FrameLayout
+                android:id="@+id/frame_profile"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="25dp"
+                android:layout_marginEnd="10dp"
+                android:background="@drawable/line_border"
+                android:backgroundTint="@color/black"
+                android:paddingTop="12dp"
+                android:paddingBottom="12dp"
+                app:layout_constraintTop_toBottomOf="@+id/iv_profile">
 
-            <TextView
-                android:id="@+id/tv_email"
-                android:layout_width="0dp"
-                android:layout_height="50dp"
-                android:layout_marginStart="20dp"
-                android:layout_marginTop="20dp"
-                android:layout_marginEnd="20dp"
-                android:background="@drawable/textview_border"
-                android:gravity="center"
-                android:hint="@string/email"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tv_birth_date"
-                tools:alpha="100"
-                tools:ignore="MissingConstraints" />
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
 
-            <TextView
-                android:id="@+id/tv_address"
-                android:layout_width="0dp"
-                android:layout_height="50dp"
-                android:layout_marginStart="20dp"
-                android:layout_marginTop="20dp"
-                android:layout_marginEnd="20dp"
-                android:background="@drawable/textview_border"
-                android:gravity="center"
-                android:hint="@string/address"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tv_email"
-                tools:alpha="100"
-                tools:ignore="MissingConstraints" />
+                    <TextView
+                        android:id="@+id/tv_name"
+                        android:layout_width="0dp"
+                        android:layout_height="50dp"
+                        android:layout_marginStart="20dp"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginEnd="20dp"
+                        android:gravity="start|top"
+                        android:hint="@string/name"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        tools:alpha="100"
+                        tools:ignore="MissingConstraints" />
 
-            <TextView
-                android:id="@+id/tv_phone_number"
-                android:layout_width="0dp"
-                android:layout_height="50dp"
-                android:layout_marginStart="20dp"
-                android:layout_marginTop="20dp"
-                android:layout_marginEnd="20dp"
-                android:background="@drawable/textview_border"
-                android:gravity="center"
-                android:hint="@string/phone_number"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tv_work"
-                tools:alpha="100"
-                tools:ignore="MissingConstraints" />
+                    <TextView
+                        android:id="@+id/tv_birth_date"
+                        android:layout_width="0dp"
+                        android:layout_height="50dp"
+                        android:layout_marginStart="20dp"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginEnd="20dp"
+                        android:gravity="start|top"
+                        android:hint="@string/birt_date"
+                        app:layout_constraintEnd_toStartOf="@+id/tv_gender"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/tv_name"
+                        tools:alpha="100"
+                        tools:ignore="MissingConstraints" />
 
-            <TextView
-                android:id="@+id/tv_gender"
-                android:layout_width="0dp"
-                android:layout_height="50dp"
-                android:layout_marginStart="20dp"
-                android:layout_marginTop="20dp"
-                android:layout_marginEnd="20dp"
-                android:background="@drawable/textview_border"
-                android:gravity="center"
-                android:hint="@string/gender"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tv_address"
-                tools:alpha="100"
-                tools:ignore="MissingConstraints" />
+                    <TextView
+                        android:id="@+id/tv_address"
+                        android:layout_width="0dp"
+                        android:layout_height="50dp"
+                        android:layout_marginStart="20dp"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginEnd="20dp"
+                        android:gravity="start|top"
+                        android:hint="@string/address"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/tv_birth_date"
+                        tools:alpha="100"
+                        tools:ignore="MissingConstraints" />
 
-            <TextView
-                android:id="@+id/tv_bpjs"
-                android:layout_width="0dp"
-                android:layout_height="50dp"
-                android:layout_marginStart="20dp"
-                android:layout_marginTop="20dp"
-                android:layout_marginEnd="20dp"
-                android:background="@drawable/textview_border"
-                android:gravity="center"
-                android:hint="@string/bpjs"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tv_gender"
-                tools:alpha="100"
-                tools:ignore="MissingConstraints" />
+                    <TextView
+                        android:id="@+id/tv_gender"
+                        android:layout_width="0dp"
+                        android:layout_height="50dp"
+                        android:layout_marginStart="20dp"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginEnd="20dp"
+                        android:gravity="start|top"
+                        android:hint="@string/gender"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@id/tv_birth_date"
+                        app:layout_constraintTop_toBottomOf="@+id/tv_name"
+                        tools:alpha="100"
+                        tools:ignore="MissingConstraints" />
 
-            <TextView
-                android:id="@+id/tv_work"
-                android:layout_width="0dp"
-                android:layout_height="50dp"
-                android:layout_marginStart="20dp"
-                android:layout_marginTop="20dp"
-                android:layout_marginEnd="20dp"
-                android:background="@drawable/textview_border"
-                android:gravity="center"
-                android:hint="@string/work"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tv_bpjs"
-                tools:alpha="100"
-                tools:ignore="MissingConstraints" />
+                    <TextView
+                        android:id="@+id/tv_work"
+                        android:layout_width="0dp"
+                        android:layout_height="50dp"
+                        android:layout_marginStart="20dp"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginEnd="20dp"
+                        android:gravity="start|top"
+                        android:hint="@string/work"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/tv_address"
+                        tools:alpha="100"
+                        tools:ignore="MissingConstraints" />
 
-            <TextView
-                android:id="@+id/tv_ktp"
-                android:layout_width="0dp"
-                android:layout_height="50dp"
-                android:layout_marginStart="20dp"
-                android:layout_marginTop="20dp"
-                android:layout_marginEnd="20dp"
-                android:background="@drawable/textview_border"
-                android:gravity="center"
-                android:hint="@string/noKtp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tv_phone_number"
-                tools:alpha="100"
-                tools:ignore="MissingConstraints" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </FrameLayout>
+
+            <FrameLayout
+                android:id="@+id/frame_phone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="25dp"
+                android:layout_marginEnd="10dp"
+                android:background="@drawable/line_border"
+                android:backgroundTint="@color/black"
+                android:paddingTop="12dp"
+                android:paddingBottom="12dp"
+                app:layout_constraintTop_toBottomOf="@+id/frame_profile">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:id="@+id/tv_email"
+                        android:layout_width="0dp"
+                        android:layout_height="50dp"
+                        android:layout_marginStart="20dp"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginEnd="20dp"
+                        android:gravity="start|top"
+                        android:hint="@string/email"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        tools:alpha="100"
+                        tools:ignore="MissingConstraints" />
+
+                    <TextView
+                        android:id="@+id/tv_phone_number"
+                        android:layout_width="0dp"
+                        android:layout_height="50dp"
+                        android:layout_marginStart="20dp"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginEnd="20dp"
+                        android:gravity="start|top"
+                        android:hint="@string/phone_number"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/tv_email"
+                        tools:alpha="100"
+                        tools:ignore="MissingConstraints" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </FrameLayout>
+
+            <FrameLayout
+                android:id="@+id/frame_id"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="25dp"
+                android:layout_marginEnd="10dp"
+                android:background="@drawable/line_border"
+                android:backgroundTint="@color/black"
+                android:paddingTop="12dp"
+                android:paddingBottom="12dp"
+                app:layout_constraintTop_toBottomOf="@+id/frame_phone">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:id="@+id/tv_bpjs"
+                        android:layout_width="0dp"
+                        android:layout_height="50dp"
+                        android:layout_marginStart="20dp"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginEnd="20dp"
+                        android:gravity="start|top"
+                        android:hint="@string/bpjs"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/tv_ktp"
+                        tools:alpha="100"
+                        tools:ignore="MissingConstraints" />
+
+                    <TextView
+                        android:id="@+id/tv_ktp"
+                        android:layout_width="0dp"
+                        android:layout_height="50dp"
+                        android:layout_marginStart="20dp"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginEnd="20dp"
+                        android:gravity="start|top"
+                        android:hint="@string/noKtp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        tools:alpha="100"
+                        tools:ignore="MissingConstraints" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </FrameLayout>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -185,20 +236,21 @@
         android:id="@+id/btn_update"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
+        android:layout_marginStart="10dp"
         android:layout_marginTop="20dp"
-        android:layout_marginEnd="20dp"
+        android:layout_marginEnd="10dp"
         android:layout_marginBottom="5dp"
-        android:background="@drawable/bg_button"
+        android:background="@drawable/frame"
+        android:backgroundTint="@color/white"
         android:gravity="center"
         android:text="@string/update"
         android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        tools:alpha="100"
-        app:layout_constraintVertical_bias="1"/>
+        app:layout_constraintVertical_bias="1"
+        tools:alpha="100" />
 
     <ProgressBar
         android:id="@+id/progressBar"

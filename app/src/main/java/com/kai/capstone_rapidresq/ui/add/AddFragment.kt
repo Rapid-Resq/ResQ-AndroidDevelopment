@@ -1,21 +1,28 @@
 package com.kai.capstone_rapidresq.ui.add
 
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
+import android.widget.EditText
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import com.kai.capstone_rapidresq.R
 import com.kai.capstone_rapidresq.databinding.FragmentAddBinding
 
 class AddFragment : Fragment() {
 
-    private var _binding: FragmentAddBinding? = null
+    private lateinit var binding: FragmentAddBinding
+    private lateinit var myButton: Button
+    private lateinit var myEditText: EditText
+
 
     // This property is only valid between onCreateView and
     // onDestroyView.
-    private val binding get() = _binding!!
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -25,18 +32,16 @@ class AddFragment : Fragment() {
         val addViewModel =
             ViewModelProvider(this).get(AddViewModel::class.java)
 
-        _binding = FragmentAddBinding.inflate(inflater, container, false)
+        binding = FragmentAddBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
-        val textView: TextView = binding.textDashboard
         addViewModel.text.observe(viewLifecycleOwner) {
-            textView.text = it
         }
         return root
+
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
-        _binding = null
     }
 }

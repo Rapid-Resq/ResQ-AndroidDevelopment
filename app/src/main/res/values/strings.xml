@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Capstone-RapidResQ</string>
+    <string name="app_name">RapidResQ</string>
     <string name="title_home">Home</string>
     <string name="title_dashboard">Dashboard</string>
     <string name="title_activity_maps">MapsActivity</string>
@@ -58,4 +58,8 @@ Keheningan hutan itu kemudian pecah saat Teo tiba-tiba saja datang sambil memeki
     <string name="work">Pekerjaan</string>
     <string name="noKtp">Nomor KTP</string>
     <string name="gender">Jenis Kelamin</string>
+    <string name="description">Deskripsi Kejadian</string>
+    <string name="victim">Jumlah Korban</string>
+    <string name="where_location">Lokasi Kejadian</string>
+    <string name="upload">Laporkan</string>
 </resources>
