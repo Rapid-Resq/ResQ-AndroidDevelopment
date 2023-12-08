@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -7,8 +7,10 @@
     tools:context=".ui.home.HomeFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraint"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
+
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/search_bar"
@@ -44,20 +46,22 @@
             android:layout_marginStart="10dp"
             android:layout_marginTop="10dp"
             android:layout_marginEnd="10dp"
-            android:background="@drawable/bg_button_disable"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/search_bar"
             tools:context=".ui.maps.MapsActivity"
+            app:cameraZoom="15"
+            app:cameraTilt="20"
             tools:ignore="MissingConstraints">
 
             <ProgressBar
                 android:id="@+id/progressBar"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"/>
+                android:layout_gravity="center" />
 
         </com.google.android.gms.maps.MapView>
+
 
         <TextView
             android:id="@+id/location"
@@ -69,7 +73,7 @@
             android:layout_marginEnd="10dp"
             android:gravity="center"
             android:hint="@string/location"
-            android:textSize="25sp"
+            android:textSize="20sp"
             app:layout_constraintEnd_toStartOf="@+id/destination"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/maps" />
@@ -83,58 +87,48 @@
             android:layout_marginEnd="10dp"
             android:gravity="center"
             android:hint="@string/destination"
-            android:textSize="25sp"
+            android:textSize="20sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/location"
             app:layout_constraintTop_toBottomOf="@+id/maps" />
 
-        <androidx.cardview.widget.CardView
-            android:id="@+id/cardViewInformation"
+        <TextView
+            android:id="@+id/notation_safeness"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
             android:layout_marginTop="10dp"
-            android:layout_marginBottom="10dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/location"
-            tools:ignore="MissingConstraints">
-
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="10dp">
-
-                <TextView
-                    android:id="@+id/notation_safeness"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="10dp"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginEnd="10dp"
-                    android:background="@drawable/textview_border"
-                    android:text="@string/safeState"
-                    android:textAlignment="center"
-                    app:layout_constraintBottom_toTopOf="@+id/detail_safeness"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent" />
-
-                <TextView
-                    android:id="@+id/detail_safeness"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="10dp"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginEnd="10dp"
-                    android:layout_marginBottom="10dp"
-                    android:background="@drawable/textview_border"
-                    android:text="@string/safeness"
-                    android:textAlignment="center"
-                    app:layout_constraintTop_toBottomOf="@+id/notation_safeness" />
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-        </androidx.cardview.widget.CardView>
+            android:layout_marginEnd="10dp"
+            android:background="@drawable/textview_border"
+            android:text="@string/safeState"
+            android:textAlignment="center"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/location" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-</ScrollView>
+    <ScrollView
+        android:id="@+id/scrollable"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_below="@+id/constraint"
+        android:layout_alignParentBottom="true"
+        android:fillViewport="true">
+
+        <TextView
+            android:id="@+id/detail_safeness"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="10dp"
+            android:background="@drawable/textview_border"
+            android:focusable="false"
+            android:focusableInTouchMode="false"
+            android:text="@string/safeness"
+            android:textAlignment="center" />
+
+    </ScrollView>
+
+</RelativeLayout>

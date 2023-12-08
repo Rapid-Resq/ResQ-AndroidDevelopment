@@ -126,6 +126,7 @@ class HomeFragment : Fragment(), OnMapReadyCallback {
         mMap.uiSettings.isMapToolbarEnabled = true
 
         getMyLocation()
+        requestPermissionLauncher
     }
 
 
