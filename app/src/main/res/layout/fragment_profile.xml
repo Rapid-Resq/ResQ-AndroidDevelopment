@@ -6,7 +6,6 @@
     android:layout_height="wrap_content"
     tools:context=".ui.profiles.ProfileFragment">
 
-
     <ScrollView
         android:id="@+id/scrollable"
         android:layout_width="match_parent"
@@ -19,19 +18,56 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-            <ImageView
-                android:id="@+id/iv_profile"
-                android:layout_width="100dp"
-                android:layout_height="100dp"
-                android:layout_centerHorizontal="true"
-                android:layout_marginStart="32dp"
-                android:layout_marginTop="30dp"
-                android:layout_marginEnd="32dp"
-                android:src="@drawable/default_profile_picture"
+            <FrameLayout
+                android:id="@+id/frame_photo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/line_border"
+                android:backgroundTint="@color/light_gray"
+                app:layout_constraintBottom_toTopOf="@+id/frame_profile"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <ImageView
+                        android:id="@+id/iv_profile"
+                        android:layout_width="100dp"
+                        android:layout_height="100dp"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginStart="20dp"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginBottom="20dp"
+                        android:layout_marginEnd="32dp"
+                        android:src="@drawable/default_profile_picture"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/tv_name"
+                        android:layout_width="0dp"
+                        android:layout_height="50dp"
+                        android:layout_marginStart="20dp"
+                        android:layout_marginEnd="20dp"
+                        android:gravity="start|top"
+                        android:hint="@string/name"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@id/iv_profile"
+                        tools:alpha="100"
+                        tools:ignore="MissingConstraints" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </FrameLayout>
 
 
             <FrameLayout
@@ -39,31 +75,17 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="10dp"
-                android:layout_marginTop="25dp"
+                android:layout_marginTop="10dp"
                 android:layout_marginEnd="10dp"
                 android:background="@drawable/line_border"
-                android:backgroundTint="@color/black"
+                android:backgroundTint="@color/light_gray"
                 android:paddingTop="12dp"
                 android:paddingBottom="12dp"
-                app:layout_constraintTop_toBottomOf="@+id/iv_profile">
+                app:layout_constraintTop_toBottomOf="@+id/frame_photo">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
-
-                    <TextView
-                        android:id="@+id/tv_name"
-                        android:layout_width="0dp"
-                        android:layout_height="50dp"
-                        android:layout_marginStart="20dp"
-                        android:layout_marginTop="20dp"
-                        android:layout_marginEnd="20dp"
-                        android:gravity="start|top"
-                        android:hint="@string/name"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        tools:alpha="100"
-                        tools:ignore="MissingConstraints" />
 
                     <TextView
                         android:id="@+id/tv_birth_date"
@@ -76,7 +98,6 @@
                         android:hint="@string/birt_date"
                         app:layout_constraintEnd_toStartOf="@+id/tv_gender"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/tv_name"
                         tools:alpha="100"
                         tools:ignore="MissingConstraints" />
 
@@ -106,7 +127,6 @@
                         android:hint="@string/gender"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toEndOf="@id/tv_birth_date"
-                        app:layout_constraintTop_toBottomOf="@+id/tv_name"
                         tools:alpha="100"
                         tools:ignore="MissingConstraints" />
 
@@ -134,10 +154,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="10dp"
-                android:layout_marginTop="25dp"
+                android:layout_marginTop="10dp"
                 android:layout_marginEnd="10dp"
                 android:background="@drawable/line_border"
-                android:backgroundTint="@color/black"
+                android:backgroundTint="@color/light_gray"
                 android:paddingTop="12dp"
                 android:paddingBottom="12dp"
                 app:layout_constraintTop_toBottomOf="@+id/frame_profile">
@@ -183,10 +203,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="10dp"
-                android:layout_marginTop="25dp"
+                android:layout_marginTop="10dp"
                 android:layout_marginEnd="10dp"
                 android:background="@drawable/line_border"
-                android:backgroundTint="@color/black"
+                android:backgroundTint="@color/light_gray"
                 android:paddingTop="12dp"
                 android:paddingBottom="12dp"
                 app:layout_constraintTop_toBottomOf="@+id/frame_phone">

@@ -42,16 +42,16 @@
         <com.google.android.gms.maps.MapView
             android:id="@+id/maps"
             android:layout_width="match_parent"
-            android:layout_height="450dp"
+            android:layout_height="400dp"
             android:layout_marginStart="10dp"
             android:layout_marginTop="10dp"
             android:layout_marginEnd="10dp"
+            app:cameraTilt="20"
+            app:cameraZoom="15"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/search_bar"
             tools:context=".ui.maps.MapsActivity"
-            app:cameraZoom="15"
-            app:cameraTilt="20"
             tools:ignore="MissingConstraints">
 
             <ProgressBar
@@ -62,49 +62,60 @@
 
         </com.google.android.gms.maps.MapView>
 
-
-        <TextView
-            android:id="@+id/location"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
-            android:layout_marginTop="20dp"
-            android:layout_marginEnd="10dp"
-            android:gravity="center"
-            android:hint="@string/location"
-            android:textSize="20sp"
-            app:layout_constraintEnd_toStartOf="@+id/destination"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/maps" />
-
-        <TextView
-            android:id="@+id/destination"
-            android:layout_width="100dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
-            android:layout_marginTop="20dp"
-            android:layout_marginEnd="10dp"
-            android:gravity="center"
-            android:hint="@string/destination"
-            android:textSize="20sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/location"
-            app:layout_constraintTop_toBottomOf="@+id/maps" />
-
-        <TextView
-            android:id="@+id/notation_safeness"
+        <FrameLayout
+            android:id="@+id/frame_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="5dp"
             android:layout_marginEnd="10dp"
             android:background="@drawable/line_border"
-            android:text="@string/safeState"
-            android:textAlignment="center"
+            android:backgroundTint="@color/light_gray"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/location" />
+            app:layout_constraintTop_toBottomOf="@+id/maps">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/location"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="@string/location"
+                    app:layout_constraintBottom_toTopOf="@+id/notation_safeness"
+                    app:layout_constraintEnd_toStartOf="@+id/destination"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/destination"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="@string/destination"
+                    app:layout_constraintBottom_toTopOf="@+id/notation_safeness"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/location"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/notation_safeness"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/safeState"
+                    android:textAlignment="center"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/destination" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </FrameLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -116,18 +127,40 @@
         android:layout_alignParentBottom="true"
         android:fillViewport="true">
 
-        <TextView
-            android:id="@+id/detail_safeness"
+        <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
             android:layout_marginStart="10dp"
-            android:layout_marginTop="10dp"
             android:layout_marginEnd="10dp"
             android:background="@drawable/line_border"
-            android:focusable="false"
-            android:focusableInTouchMode="false"
-            android:text="@string/safeness"
-            android:textAlignment="center" />
+            android:backgroundTint="@color/light_gray">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                tools:ignore="ExtraText">
+
+                <TextView
+                    android:id="@+id/detail_safeness"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginEnd="10dp"
+                    android:focusable="false"
+                    android:focusableInTouchMode="false"
+                    android:text="@string/safeness"
+                    android:textAlignment="center"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />\
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </FrameLayout>
 
     </ScrollView>
 
