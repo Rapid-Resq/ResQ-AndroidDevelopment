@@ -8,8 +8,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.kai.capstone_rapidresq.databinding.FragmentProfileBinding
-import com.kai.capstone_rapidresq.ui.maps.MapsActivity
-import com.kai.capstone_rapidresq.ui.updateProfile.UpdateProfileDataActivity
+import com.kai.capstone_rapidresq.ui.add.updateProfile.UpdateProfileDataActivity
 
 class ProfileFragment : Fragment() {
 
@@ -35,6 +34,7 @@ class ProfileFragment : Fragment() {
             navigateToUpdateDataProfile()
         }
     }
+
     private fun navigateToUpdateDataProfile(){
         val intent = Intent(activity, UpdateProfileDataActivity::class.java)
         startActivity(intent)

@@ -29,7 +29,7 @@
             android:name=".ui.add.CameraActivity"
             android:exported="false" />
         <activity
-            android:name=".ui.updateProfile.UpdateProfileDataActivity"
+            android:name=".ui.add.updateProfile.UpdateProfileDataActivity"
             android:exported="false" />
         <!--
              TODO: Before you run your application, you need a Google Maps API key.
