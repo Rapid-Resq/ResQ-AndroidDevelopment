@@ -4,7 +4,6 @@ import android.content.pm.PackageManager
 import android.graphics.Bitmap
 import android.graphics.Canvas
 import android.graphics.Color
-import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -13,12 +12,10 @@ import android.view.MenuInflater
 import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
-import android.view.WindowInsets
-import android.view.WindowManager
+import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.annotation.ColorInt
 import androidx.annotation.DrawableRes
-import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.core.content.res.ResourcesCompat
 import androidx.core.graphics.drawable.DrawableCompat
@@ -52,7 +49,7 @@ class HomeFragment : Fragment(), OnMapReadyCallback {
             ViewModelProvider(this).get(HomeViewModel::class.java)
 
         binding = FragmentHomeBinding.inflate(inflater, container, false)
-        val root: View = binding!!.root
+        val root: View = binding.root
 
         homeViewModel.text.observe(viewLifecycleOwner) {
         }
@@ -64,9 +61,7 @@ class HomeFragment : Fragment(), OnMapReadyCallback {
         mapView = binding.maps
         mapView.onCreate(savedInstanceState)
         mapView.getMapAsync(this)
-        // Menghilangkan ActionBar
-//        val actionBar = (activity as? AppCompatActivity)?.supportActionBar
-//        actionBar?.hide()
+
     }
 
     private fun vectorToBitmap(@DrawableRes id: Int, @ColorInt color: Int): BitmapDescriptor {
@@ -139,6 +134,7 @@ class HomeFragment : Fragment(), OnMapReadyCallback {
             }
         }
 
+    @Suppress("DEPRECATION")
     private fun getMyLocation() {
         if (ContextCompat.checkSelfPermission(
                 requireContext(),
@@ -175,18 +171,17 @@ class HomeFragment : Fragment(), OnMapReadyCallback {
                 if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                     enableMyLocation()
                 } else {
-                    // Handle case when permission is denied
-                    // You may show a message to the user or take appropriate action
+                    Toast.makeText(context, "Izin lokasi ditolak", Toast.LENGTH_SHORT).show()
                 }
             }
         }
     }
 
-
     private fun showLoading(isLoading: Boolean) {
         binding.progressBar.visibility = if (isLoading) View.VISIBLE else View.GONE
     }
 
+    @Suppress("DEPRECATION")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setHasOptionsMenu(true)
@@ -244,21 +239,6 @@ class HomeFragment : Fragment(), OnMapReadyCallback {
     override fun onLowMemory() {
         super.onLowMemory()
         mapView.onLowMemory()
-    }
-    @Suppress("DEPRECATION")
-    private fun setupView() {
-        activity?.let { fragmentActivity ->
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
-                fragmentActivity.window.insetsController?.hide(WindowInsets.Type.statusBars())
-            } else {
-                fragmentActivity.window.setFlags(
-                    WindowManager.LayoutParams.FLAG_FULLSCREEN,
-                    WindowManager.LayoutParams.FLAG_FULLSCREEN
-                )
-            }
-
-            (fragmentActivity as? AppCompatActivity)?.supportActionBar?.hide()
-        }
     }
 
     override fun onDestroyView() {

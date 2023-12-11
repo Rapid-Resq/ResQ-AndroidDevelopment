@@ -12,7 +12,7 @@ import com.google.android.gms.maps.model.MarkerOptions
 import com.kai.capstone_rapidresq.R
 import com.kai.capstone_rapidresq.databinding.ActivityMapsBinding
 
-class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
+class MapsManager : AppCompatActivity(), OnMapReadyCallback {
 
     private lateinit var mMap: GoogleMap
     private lateinit var binding: ActivityMapsBinding

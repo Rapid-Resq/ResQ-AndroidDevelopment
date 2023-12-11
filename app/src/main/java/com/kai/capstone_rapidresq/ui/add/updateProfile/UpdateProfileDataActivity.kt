@@ -1,16 +1,22 @@
 package com.kai.capstone_rapidresq.ui.add.updateProfile
 
 import android.Manifest
+import android.app.DatePickerDialog
+import android.content.Intent
 import android.content.pm.PackageManager
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.ContextCompat
+import com.kai.capstone_rapidresq.MainActivity
 import com.kai.capstone_rapidresq.databinding.ActivityUpdateProfileDataBinding
 import com.kai.capstone_rapidresq.ui.add.getImageUri
+import com.kai.capstone_rapidresq.ui.login.LoginActivity
+import java.util.Calendar
 
 class UpdateProfileDataActivity : AppCompatActivity() {
 
@@ -38,7 +44,42 @@ class UpdateProfileDataActivity : AppCompatActivity() {
             requestPermissionLauncher.launch(REQUIRED_PERMISSION)
         }
 
+        binding.birtDateEditText.setOnClickListener {
+            binding.birtDateEditText.isFocusable = false
+            showDatePicker()
+        }
+
         binding.uploadProfile.setOnClickListener{startCamera()}
+        binding.btnUpdate.setOnClickListener { toMain() }
+    }
+
+    private fun toMain(){
+        intent = Intent(this, MainActivity::class.java)
+        startActivity(intent)
+    }
+
+    private fun showDatePicker() {
+        val calendar = Calendar.getInstance()
+        val year = calendar.get(Calendar.YEAR)
+        val month = calendar.get(Calendar.MONTH)
+        val dayOfMonth = calendar.get(Calendar.DAY_OF_MONTH)
+
+        val datePickerDialog = DatePickerDialog(
+            this,
+            { _, selectedYear, selectedMonth, selectedDay ->
+                val selectedDate = "$selectedYear-${selectedMonth + 1}-$selectedDay"
+                binding.birtDateEditText.setText(selectedDate)
+            },
+            year,
+            month,
+            dayOfMonth
+        )
+
+        datePickerDialog.setOnDismissListener {
+            binding.birtDateEditText.isFocusableInTouchMode = true
+        }
+
+        datePickerDialog.show()
     }
 
     private fun showImage() {
