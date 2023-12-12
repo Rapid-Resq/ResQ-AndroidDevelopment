@@ -11,6 +11,12 @@
         android:label="@string/title_home"
         tools:layout="@layout/fragment_home" />
 
+<!--    <fragment-->
+<!--        android:id="@+id/autocomplete_fragment"-->
+<!--        android:name="com.kai.capstone_rapidresq.ui.home.HomeFragment"-->
+<!--        android:label="@string/search"-->
+<!--        tools:layout="@layout/places_autocomplete_fragment"/>-->
+
     <fragment
         android:id="@+id/navigation_add"
         android:name="com.kai.capstone_rapidresq.ui.add.AddFragment"

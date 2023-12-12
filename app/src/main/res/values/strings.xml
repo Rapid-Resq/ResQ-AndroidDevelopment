@@ -62,4 +62,6 @@ Keheningan hutan itu kemudian pecah saat Teo tiba-tiba saja datang sambil memeki
     <string name="victim">Jumlah Korban</string>
     <string name="where_location">Lokasi Kejadian</string>
     <string name="upload">Laporkan</string>
+    <string name="start_point">Current Location</string>
+    <string name="welcomeText">Aplikasi darurat untuk kecelakaan</string>
 </resources>

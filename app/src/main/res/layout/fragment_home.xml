@@ -11,56 +11,51 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/search_bar"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
-            android:layout_marginEnd="10dp"
-            app:layout_constraintBottom_toTopOf="@+id/maps"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:startIconDrawable="@drawable/ic_baseline_search_24"
-            tools:alpha="100"
-            tools:ignore="MissingConstraints">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/search_bar_edit"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:ems="10"
-                android:gravity="center"
-                android:hint="@string/search"
-                android:inputType="textEmailAddress"
-                tools:ignore="SpeakableTextPresentCheck" />
-
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <com.google.android.gms.maps.MapView
+        <fragment
             android:id="@+id/maps"
+            android:name="com.google.android.gms.maps.SupportMapFragment"
             android:layout_width="match_parent"
-            android:layout_height="400dp"
+            android:layout_height="500dp"
             android:layout_marginStart="10dp"
             android:layout_marginTop="10dp"
             android:layout_marginEnd="10dp"
-            app:cameraTilt="20"
-            app:cameraZoom="15"
+            app:layout_constraintBottom_toTopOf="@+id/frame_text"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/search_bar"
-            tools:context=".ui.maps.MapsManager"
-            tools:ignore="MissingConstraints">
+            app:layout_constraintTop_toTopOf="parent"
+            tools:context=".ui.maps.MapsActivity"
+            tools:layout="@layout/activity_maps">
 
-            <ProgressBar
-                android:id="@+id/progressBar"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
 
-        </com.google.android.gms.maps.MapView>
+                <EditText
+                    android:id="@+id/search_bar_edit"
+                    android:layout_width="0dp"
+                    android:layout_height="40dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginStart="5dp"
+                    android:layout_weight="1"
+                    android:textAlignment="center"
+                    android:background="@drawable/search_frame"
+                    android:backgroundTint="@color/white"
+                    android:hint="Search Location"
+                    android:inputType="textPersonName"
+                    android:textColor="@color/black" />
+
+                <ImageView
+                    android:id="@+id/search_button"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:background="@drawable/ic_baseline_search_24"
+                    android:backgroundTint="@color/black"
+                    android:textColor="@color/white" />
+
+            </LinearLayout>
+
+        </fragment>
 
         <FrameLayout
             android:id="@+id/frame_text"
@@ -136,8 +131,8 @@
                     android:layout_marginTop="5dp"
                     android:layout_marginBottom="10dp"
                     android:text="@string/safeState"
-                    android:textStyle="bold"
                     android:textAlignment="center"
+                    android:textStyle="bold"
                     app:layout_constraintBottom_toTopOf="@+id/detail_safeness"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"

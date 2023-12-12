@@ -12,7 +12,7 @@ import com.google.android.gms.maps.model.MarkerOptions
 import com.kai.capstone_rapidresq.R
 import com.kai.capstone_rapidresq.databinding.ActivityMapsBinding
 
-class MapsManager : AppCompatActivity(), OnMapReadyCallback {
+class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
 
     private lateinit var mMap: GoogleMap
     private lateinit var binding: ActivityMapsBinding
@@ -25,7 +25,7 @@ class MapsManager : AppCompatActivity(), OnMapReadyCallback {
 
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         val mapFragment = supportFragmentManager
-            .findFragmentById(R.id.maps) as SupportMapFragment
+            .findFragmentById(R.id.map) as SupportMapFragment
         mapFragment.getMapAsync(this)
     }
 
