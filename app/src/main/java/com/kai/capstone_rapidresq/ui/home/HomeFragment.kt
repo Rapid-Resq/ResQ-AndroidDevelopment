@@ -154,26 +154,31 @@ class HomeFragment : Fragment(), OnMapReadyCallback, LocationListener,
 
     fun searchLocation() {
         val locationSearch: EditText = binding.searchBarEdit
-        val location: String
-        location = locationSearch.text.toString().trim()
+        val location: String = locationSearch.text.toString().trim()
         var addressList: List<Address>? = null
 
         if (location == null || location == "") {
-            Toast.makeText(requireContext(), "provide location", Toast.LENGTH_SHORT).show()
+            Toast.makeText(requireContext(), "Tentukan Lokasi", Toast.LENGTH_SHORT).show()
         } else {
             val geoCoder = Geocoder(requireContext())
+
             try {
                 addressList = geoCoder.getFromLocationName(location, 1)
             } catch (e: IOException) {
                 e.printStackTrace()
             }
 
-            val address = addressList!![0]
-            val latLng = LatLng(address.latitude, address.longitude)
-            mMap.addMarker(MarkerOptions().position(latLng).title(location))
-            mMap.animateCamera(CameraUpdateFactory.newLatLng(latLng))
+            if (addressList != null && addressList.isNotEmpty()) {
+                val address = addressList[0]
+                val latLng = LatLng(address.latitude, address.longitude)
+                mMap.addMarker(MarkerOptions().position(latLng).title(location))
+                mMap.animateCamera(CameraUpdateFactory.newLatLng(latLng))
+            } else {
+                Toast.makeText(requireContext(), "Lokasi tidak ditemukan", Toast.LENGTH_SHORT).show()
+            }
         }
     }
+
 
     private fun vectorToBitmap(@DrawableRes id: Int, @ColorInt color: Int): BitmapDescriptor {
         val vectorDrawable = ResourcesCompat.getDrawable(resources, id, null)

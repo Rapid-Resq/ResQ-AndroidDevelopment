@@ -16,4 +16,5 @@
     <color name="white_blue">#A1C1F7</color>
     <color name="lightest_blue">#B4CDF7</color>
     <color name="blue_splash">#0D47A1</color>
+    <color name="lightest_gray">#E7E7E7</color>
 </resources>
