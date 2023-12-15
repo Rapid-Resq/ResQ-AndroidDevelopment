@@ -7,7 +7,6 @@ plugins {
 
 android {
     namespace = "com.kai.capstone_rapidresq"
-    testNamespace = "com.kai.capstone_rapidresq"
     compileSdk = 34
 
     defaultConfig {

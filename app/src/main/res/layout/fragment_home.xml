@@ -42,7 +42,7 @@
                     android:background="@drawable/search_frame"
                     android:hint="Search Location"
                     android:inputType="textPersonName"
-                    android:textColor="@color/black" />
+                    android:textColor="@color/light_gray" />
 
                 <ImageView
                     android:id="@+id/search_button"
@@ -51,7 +51,7 @@
                     android:layout_width="38dp"
                     android:layout_height="38dp"
                     android:background="@drawable/ic_baseline_search_24"
-                    android:backgroundTint="@color/black"
+                    android:backgroundTint="@color/light_gray"
                     android:textColor="@color/white" />
 
             </LinearLayout>

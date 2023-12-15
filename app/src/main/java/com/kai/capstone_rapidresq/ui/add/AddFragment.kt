@@ -10,6 +10,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.activity.result.PickVisualMediaRequest
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
@@ -56,10 +57,25 @@ class AddFragment : Fragment() {
         
 
         binding.btnCamera.setOnClickListener { startCamera() }
+        binding.btnGallery.setOnClickListener { startGallery() }
 
         return root
     }
 
+    private val launchGallery = registerForActivityResult(
+        ActivityResultContracts.PickVisualMedia()
+    ){uri: Uri? ->
+        if (uri != null){
+            imageUri = uri
+            showImage()
+        }else {
+            Log.d("Photo Picker", "Tidak ada gambar yang dipilih")
+        }
+    }
+
+    private fun startGallery() {
+        launchGallery.launch(PickVisualMediaRequest(ActivityResultContracts.PickVisualMedia.ImageOnly))
+    }
 
     private val launcherIntentCamera = registerForActivityResult(
         ActivityResultContracts.TakePicture()

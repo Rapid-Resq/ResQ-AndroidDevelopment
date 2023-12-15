@@ -59,8 +59,7 @@
                 android:hint="@string/name"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/image_frame"
-                tools:alpha="100">
+                app:layout_constraintTop_toBottomOf="@+id/image_frame">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/name_EditText"

@@ -8,6 +8,7 @@ import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.MenuItem
 import android.view.View
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
@@ -39,6 +40,7 @@ class UpdateProfileDataActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityUpdateProfileDataBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
         if (!permissionGranted()) {
             requestPermissionLauncher.launch(REQUIRED_PERMISSION)
@@ -51,6 +53,16 @@ class UpdateProfileDataActivity : AppCompatActivity() {
 
         binding.uploadProfile.setOnClickListener{startCamera()}
         binding.btnUpdate.setOnClickListener { toMain() }
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            android.R.id.home -> {
+                onBackPressed() // Aksi kembali
+                return true
+            }
+            else -> return super.onOptionsItemSelected(item)
+        }
     }
 
     private fun toMain(){

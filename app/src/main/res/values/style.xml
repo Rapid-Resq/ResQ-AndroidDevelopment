@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="TransparentActionBar" parent="Widget.AppCompat.ActionBar">
+        <item name="android:background">@android:color/transparent</item>
+        <item name="android:elevation">0dp</item>
+        <item name="android:titleTextStyle">@style/ActionBar.TitleTextStyle.Transparent</item>
+    </style>
+
+    <style name="ActionBar.TitleTextStyle.Transparent" parent="TextAppearance.AppCompat.Widget.ActionBar.Title">
+        <item name="android:textColor">@android:color/white</item>
+    </style>
+</resources>
