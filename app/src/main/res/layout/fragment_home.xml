@@ -31,28 +31,37 @@
                 android:layout_height="match_parent"
                 android:orientation="horizontal">
 
-                <EditText
-                    android:id="@+id/search_bar_edit"
-                    android:layout_width="0dp"
-                    android:layout_height="38dp"
-                    android:layout_marginTop="12dp"
-                    android:layout_marginStart="12dp"
-                    android:layout_weight="1"
-                    android:textAlignment="center"
+                <FrameLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:alpha="0.9"
                     android:background="@drawable/search_frame"
-                    android:hint="Search Location"
-                    android:inputType="textPersonName"
-                    android:textColor="@color/light_gray" />
+                    android:backgroundTint="@color/lightest_gray">
 
-                <ImageView
-                    android:id="@+id/search_button"
-                    android:layout_marginTop="12dp"
-                    android:layout_marginEnd="50dp"
-                    android:layout_width="38dp"
-                    android:layout_height="38dp"
-                    android:background="@drawable/ic_baseline_search_24"
-                    android:backgroundTint="@color/light_gray"
-                    android:textColor="@color/white" />
+                    <EditText
+                        android:id="@+id/search_bar_edit"
+                        android:layout_width="300dp"
+                        android:layout_height="38dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/search_frame"
+                        android:hint="Search Location"
+                        android:inputType="textPersonName"
+                        android:textAlignment="center"
+                        android:textColor="@color/black" />
+
+                    <ImageView
+                        android:id="@+id/search_button"
+                        android:layout_width="38dp"
+                        android:layout_height="38dp"
+                        android:layout_gravity="end"
+                        android:background="@drawable/ic_baseline_search_24"
+                        android:backgroundTint="@color/light_gray"
+                        android:layout_alignParentEnd="true"
+                        android:layout_alignParentTop="true"
+                        android:textColor="@color/white" />
+
+                </FrameLayout>
 
             </LinearLayout>
 

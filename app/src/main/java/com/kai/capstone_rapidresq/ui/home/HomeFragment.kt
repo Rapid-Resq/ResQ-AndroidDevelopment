@@ -14,7 +14,6 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.Menu
 import android.view.MenuInflater
-import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import android.widget.EditText
@@ -161,13 +160,11 @@ class HomeFragment : Fragment(), OnMapReadyCallback, LocationListener,
             Toast.makeText(requireContext(), "Tentukan Lokasi", Toast.LENGTH_SHORT).show()
         } else {
             val geoCoder = Geocoder(requireContext())
-
             try {
                 addressList = geoCoder.getFromLocationName(location, 1)
             } catch (e: IOException) {
                 e.printStackTrace()
             }
-
             if (addressList != null && addressList.isNotEmpty()) {
                 val address = addressList[0]
                 val latLng = LatLng(address.latitude, address.longitude)
@@ -178,7 +175,6 @@ class HomeFragment : Fragment(), OnMapReadyCallback, LocationListener,
             }
         }
     }
-
 
     private fun vectorToBitmap(@DrawableRes id: Int, @ColorInt color: Int): BitmapDescriptor {
         val vectorDrawable = ResourcesCompat.getDrawable(resources, id, null)
@@ -237,7 +233,6 @@ class HomeFragment : Fragment(), OnMapReadyCallback, LocationListener,
         requestPermissionLauncher
     }
 
-
     private val requestPermissionLauncher =
         registerForActivityResult(
             ActivityResultContracts.RequestMultiplePermissions()
@@ -252,7 +247,6 @@ class HomeFragment : Fragment(), OnMapReadyCallback, LocationListener,
                     // Only approximate location access granted.
                     getMyLastLocation()
                 }
-
                 else -> {
                     // No location access granted.
                 }
@@ -343,10 +337,6 @@ class HomeFragment : Fragment(), OnMapReadyCallback, LocationListener,
         }
     }
 
-//    private fun showLoading(isLoading: Boolean) {
-//        binding.progressBar.visibility = if (isLoading) View.VISIBLE else View.GONE
-//    }
-
     @Suppress("DEPRECATION")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -356,34 +346,5 @@ class HomeFragment : Fragment(), OnMapReadyCallback, LocationListener,
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         inflater.inflate(R.menu.map_options, menu)
         super.onCreateOptionsMenu(menu, inflater)
-    }
-
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        return when (item.itemId) {
-            R.id.normal_type -> {
-                mMap.mapType = GoogleMap.MAP_TYPE_NORMAL
-                true
-            }
-
-            R.id.satellite_type -> {
-                mMap.mapType = GoogleMap.MAP_TYPE_SATELLITE
-                true
-            }
-
-            R.id.terrain_type -> {
-                mMap.mapType = GoogleMap.MAP_TYPE_TERRAIN
-                true
-            }
-
-            R.id.hybrid_type -> {
-                mMap.mapType = GoogleMap.MAP_TYPE_HYBRID
-                true
-            }
-
-            else -> {
-                super.onOptionsItemSelected(item)
-            }
-        }
     }
 }
