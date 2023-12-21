@@ -7,8 +7,8 @@ import android.text.TextWatcher
 import android.widget.Button
 import android.widget.EditText
 import androidx.appcompat.app.AppCompatActivity
-import com.kai.capstone_rapidresq.MainActivity
 import com.kai.capstone_rapidresq.databinding.ActivityLoginBinding
+import com.kai.capstone_rapidresq.ui.add.updateProfile.UpdateProfileDataActivity
 import com.kai.capstone_rapidresq.ui.register.RegisterActivity
 
 class LoginActivity : AppCompatActivity() {
@@ -26,7 +26,7 @@ class LoginActivity : AppCompatActivity() {
         loginBtn = binding.btnLogin
 
         binding.tvToRegister.setOnClickListener { toRegister() }
-        binding.btnLogin.setOnClickListener { navigateToHome() }
+        binding.btnLogin.setOnClickListener { navigateToUserData() }
         loginSuccess()
     }
 
@@ -54,8 +54,8 @@ class LoginActivity : AppCompatActivity() {
         startActivity(intent)
     }
 
-    private fun navigateToHome() {
-        intent = Intent(this, MainActivity::class.java)
+    private fun navigateToUserData() {
+        intent = Intent(this, UpdateProfileDataActivity::class.java)
         startActivity(intent)
     }
 }

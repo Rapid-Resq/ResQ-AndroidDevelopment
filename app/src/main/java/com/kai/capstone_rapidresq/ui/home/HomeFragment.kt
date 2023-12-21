@@ -2,7 +2,6 @@ package com.kai.capstone_rapidresq.ui.home
 
 import android.Manifest
 import android.annotation.SuppressLint
-import android.annotation.TargetApi
 import android.app.PendingIntent
 import android.content.Intent
 import android.content.pm.PackageManager
@@ -24,7 +23,6 @@ import android.widget.ProgressBar
 import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.annotation.RequiresApi
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
@@ -73,6 +71,8 @@ class HomeFragment : Fragment(), OnMapReadyCallback, LocationListener,
     internal lateinit var mLocationRequest: LocationRequest
     private lateinit var placesClient: PlacesClient
     private lateinit var geoApiContext: GeoApiContext
+    private val runningQOrLater = Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q
+
 
     private var userLatitude: Double = 0.0
     private var userLongitude: Double = 0.0
@@ -80,7 +80,7 @@ class HomeFragment : Fragment(), OnMapReadyCallback, LocationListener,
     private val geofenceLat = -7.792782900507159
     private val geofenceLong = 110.40569498001508
     private val saverity = "Tingkat Saverity : "
-    private val geofenceRadius = 50.0
+    private val geofenceRadius = 500.0
     private lateinit var geofencingClient: GeofencingClient
 
     override fun onCreateView(
@@ -96,6 +96,7 @@ class HomeFragment : Fragment(), OnMapReadyCallback, LocationListener,
 
         homeViewModel.text.observe(viewLifecycleOwner) {
         }
+
 
         val mapFragment = childFragmentManager.findFragmentById(R.id.maps) as SupportMapFragment
         mapFragment.getMapAsync(this)
@@ -278,9 +279,9 @@ class HomeFragment : Fragment(), OnMapReadyCallback, LocationListener,
             searchLocation()
         }
 
+        checkAndRequestPermission()
         getMyLocation()
         addGeofence()
-        checkAndRequestPermission()
     }
 
     private val geofencePendingIntent: PendingIntent by lazy {
@@ -362,24 +363,15 @@ class HomeFragment : Fragment(), OnMapReadyCallback, LocationListener,
             permissionsToRequest.add(Manifest.permission.POST_NOTIFICATIONS)
         }
 
+        if (runningQOrLater) {
+            checkPermission(Manifest.permission.ACCESS_BACKGROUND_LOCATION)
+        }
+
         if (permissionsToRequest.isNotEmpty()) {
             requestPermissionLauncher.launch(permissionsToRequest.toTypedArray())
         } else {
             getMyLocation()
         }
-    }
-    private val runningQOrLater = Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q
-    @RequiresApi(Build.VERSION_CODES.Q)
-    @TargetApi(Build.VERSION_CODES.Q)
-    private fun checkLocationPermissions(): Boolean {
-        val foregroundLocationApproved = checkPermission(Manifest.permission.ACCESS_FINE_LOCATION)
-        val backgroundPermissionApproved =
-            if (runningQOrLater) {
-                checkPermission(Manifest.permission.ACCESS_BACKGROUND_LOCATION)
-            } else {
-                true
-            }
-        return foregroundLocationApproved && backgroundPermissionApproved
     }
 
     private fun checkPermission(permission: String): Boolean {
@@ -415,7 +407,6 @@ class HomeFragment : Fragment(), OnMapReadyCallback, LocationListener,
             )
         }
     }
-
 
     @Suppress("DEPRECATION")
     private fun getMyLocation() {
