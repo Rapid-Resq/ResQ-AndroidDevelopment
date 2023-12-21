@@ -1,18 +1,16 @@
 package com.kai.capstone_rapidresq.ui.article
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.kai.capstone_rapidresq.R
-import com.kai.capstone_rapidresq.databinding.FragmentAddBinding
+import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.kai.capstone_rapidresq.data.local.DataArticle
 import com.kai.capstone_rapidresq.databinding.FragmentArticleBinding
-import com.kai.capstone_rapidresq.databinding.FragmentProfileBinding
 
 class ArticleFragment : Fragment() {
 
-    private var _binding: FragmentArticleBinding? = null
     private lateinit var binding: FragmentArticleBinding
 
     override fun onCreateView(
@@ -21,13 +19,22 @@ class ArticleFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentArticleBinding.inflate(inflater, container, false)
+
+        showArticleList()
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val articleImage = ""
+    }
+
+    private fun showArticleList() {
+        val articleAdapter = ArticleAdapter()
+        binding.recycleViewArticle.layoutManager = LinearLayoutManager(requireContext())
+        binding.recycleViewArticle.adapter = articleAdapter
+
+        articleAdapter.addArticleList(DataArticle.articleList)
     }
 
     override fun onDestroyView() {

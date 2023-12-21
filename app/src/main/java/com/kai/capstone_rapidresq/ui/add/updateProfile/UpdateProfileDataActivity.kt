@@ -5,18 +5,16 @@ import android.app.DatePickerDialog
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.net.Uri
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.MenuItem
-import android.view.View
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import com.kai.capstone_rapidresq.MainActivity
 import com.kai.capstone_rapidresq.databinding.ActivityUpdateProfileDataBinding
 import com.kai.capstone_rapidresq.ui.add.getImageUri
-import com.kai.capstone_rapidresq.ui.login.LoginActivity
 import java.util.Calendar
 
 class UpdateProfileDataActivity : AppCompatActivity() {
@@ -36,6 +34,8 @@ class UpdateProfileDataActivity : AppCompatActivity() {
     private fun permissionGranted() = ContextCompat.checkSelfPermission(
         this, REQUIRED_PERMISSION
     ) == PackageManager.PERMISSION_GRANTED
+
+    @Suppress("DEPRECATION")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityUpdateProfileDataBinding.inflate(layoutInflater)
@@ -46,26 +46,56 @@ class UpdateProfileDataActivity : AppCompatActivity() {
             requestPermissionLauncher.launch(REQUIRED_PERMISSION)
         }
 
+//        val user: DummyUser? = intent.getParcelableExtra("user")
+//        if (user != null) {
+//            binding.nameEditText.setText(user.nama)
+//            binding.addressEditText.setText(user.address)
+//            binding.emailEditText.setText(user.email)
+//
+//            when (user.gender.toLowerCase()) {
+//                "laki-laki" -> binding.radioButtonMale.isChecked = true
+//                "Perempuan" -> binding.radioButtonFemale.isChecked = true
+//                else -> "Unknown"
+//            }
+//
+//            binding.bpjsEditText.setText(user.bpjs)
+//            binding.noKtpEditText.setText(user.ktp.toString())
+//            binding.birtDateEditText.setText(user.birthDate)
+//            binding.phoneNumberEditText.setText(user.phoneNumber.toString())
+//            binding.workEditText.setText(user.job)
+//            Glide.with(this).load(user.profilePhoto).placeholder(R.drawable.ic_baseline_person_24)
+//                .into(binding.ivProfile)
+//        }
+
         binding.birtDateEditText.setOnClickListener {
             binding.birtDateEditText.isFocusable = false
             showDatePicker()
         }
-
-        binding.uploadProfile.setOnClickListener{startCamera()}
+        binding.uploadProfile.setOnClickListener { startCamera() }
         binding.btnUpdate.setOnClickListener { toMain() }
     }
 
+    private fun getGenderText(gender: Int): String {
+        return when (gender) {
+            0 -> "laki-laki"
+            1 -> "perempuan"
+            else -> "Unknown"
+        }
+    }
+
+    @Suppress("DEPRECATION")
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             android.R.id.home -> {
-                onBackPressed() // Aksi kembali
+                onBackPressed()
                 return true
             }
+
             else -> return super.onOptionsItemSelected(item)
         }
     }
 
-    private fun toMain(){
+    private fun toMain() {
         intent = Intent(this, MainActivity::class.java)
         startActivity(intent)
     }
@@ -113,6 +143,7 @@ class UpdateProfileDataActivity : AppCompatActivity() {
         imageUri = getImageUri(this)
         launcherIntentCamera.launch(imageUri)
     }
+
     companion object {
         private const val REQUIRED_PERMISSION = Manifest.permission.CAMERA
     }

@@ -9,9 +9,9 @@
 
     <ImageView
         android:id="@+id/splash"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/logo_rapidresq"
+        android:src="@drawable/logo_fix"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -25,7 +25,7 @@
         android:text="@string/welcomeText"
         android:textAlignment="center"
         android:textColor="@color/white"
-        android:textStyle="italic"
+        android:elegantTextHeight="true"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"

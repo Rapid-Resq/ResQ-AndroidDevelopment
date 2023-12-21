@@ -21,27 +21,18 @@
     <string name="title_add">Upload</string>
     <string name="location">Lokasi sekarang</string>
     <string name="destination">Tujuan</string>
-    <string name="safeness">Tingkat kerawanan kecelakaan pada wilayah ini : Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Matahari bersinar terik di Lampung. Sinarnya terhalang rimbunnya pepohonan, sehingga hanya menyisakan berkas tipis. Burung-burung berkicau seolah sedang menyanyikan lagu untuk alam. Bunyi riak jernih sungai beradu dengan batu kali berpadu dengan sahutan dari beberapa penghuni hutan yang lainnya. Ya, inilah tempat tinggal Bora, si anak gajah Lampung yang sekarang tengah asyik bermain bersama teman-temannya di sebuah sungai.
+    <string name="safeness">
+Tikungan A (Severity 2)
+   Anda akan menghadapi Tikungan A dengan tingkat kesulitan sebesar 2. Harap berhati-hati saat melewati tikungan ini, karena tingkat kesulitan yang sedang bisa menuntut kewaspadaan ekstra dan keterampilan mengemudi yang baik.\n
 
-       Ketika Bora menyemprotkan air ke arah Dodo—anak gajah lainnya—dengan belalainya, ia pun memekik nyaring. Sampai akhirnya, kegembiraan mereka terpecah oleh bunyi bising dari sebelah utara hutan. Bunyi bising itu bercampur dengan deru sesuatu yang sama sekali tidak Bora kenal.
+Tanjakan A (Severity 3)
+   Setelah melewati Tikungan A, Anda akan menghadapi Tanjakan A dengan tingkat kesulitan sebesar 3. Tanjakan ini memerlukan perhatian ekstra dan mungkin memerlukan penyesuaian kecepatan. Pastikan kendaraan Anda dalam kondisi baik untuk menghadapi tantangan ini.\n
 
-       “Hei, lihat itu!”
+Perempatan B (Severity 1)
+   Anda akan tiba di Perempatan B, yang memiliki tingkat kesulitan sebesar 1. Meskipun tingkat kesulitan rendah, tetap penting untuk mematuhi aturan lalu lintas dan memberikan perhatian pada pengendara lain di sekitar perempatan ini.
 
-       Semua serentak menghentikan kegiatan mereka dan menengok ke langit yang ditunjuk Dodo. Asap hitam tebal yang membumbung tinggi dari sana. Asap itu semakin tebal dan terus menebal. Itu merupakan fenomena aneh yang baru pertama kali mereka saksikan. Selama ini yang mereka tahu, langit selalu berwarna biru cerah dengan awan putih berarakan.
-
-Keheningan hutan itu kemudian pecah saat Teo tiba-tiba saja datang sambil memekik nyaring, “Hutan terbakar! Hutan terbakar!”
-
-       Semua ikut memekik ketakutan. Hutan terbakar! Tempat tinggal mereka terbakar!
-
-       “Bora! Apa yang kau lakukan!? Cepat pergi!” Pipin berteriak sambil menarik belalai Bora dengan belalainya..
-
-       Suasana hutan yang tadinya damai tenteram, seketika menjadi neraka bagi semua hewan. Asap hitam pekat yang mulai menyelimuti seluruh hutan ini. Suhu udara mulai panas, membuat para hewan makin berteriak nyaring.
-
-       Bora panik bukan main. Sambil mengikuti langkah Pipin, matanya bergerak ke sana-ke mari, mencari sosok ibunya.
-
-       “Pipin! Di mana ibuku?” tanya Bora.
-
-       “I-ibu … ibumu ….” Pipin tidak bisa menjawab karena sama-sama tidak tahu di mana ibu Bora berada.</string>
+Selamat perjalanan, dan pastikan untuk mengikuti petunjuk jalan dengan cermat untuk mencapai tujuan Anda dengan aman.
+</string>
     <string name="article">Artikel</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
@@ -49,7 +40,7 @@ Keheningan hutan itu kemudian pecah saat Teo tiba-tiba saja datang sambil memeki
     <string name="male">Laki-Laki</string>
     <string name="female">Perempuan</string>
     <string name="bpjs">No BPJS</string>
-    <string name="safeState">Tingkat rawan kecelakaan pada region ini :</string>
+    <string name="safeState">Untuk mencapai destinasi yang diinginkan, Anda akan melewati beberapa titik kritis di sepanjang rute, termasuk:</string>
     <string name="normal_type">Normal Maps</string>
     <string name="satellite_type">Satellite Maps</string>
     <string name="terrain_type">Terrain Maps</string>
@@ -64,4 +55,6 @@ Keheningan hutan itu kemudian pecah saat Teo tiba-tiba saja datang sambil memeki
     <string name="upload">Laporkan</string>
     <string name="start_point">Current Location</string>
     <string name="welcomeText">Aplikasi darurat untuk kecelakaan</string>
+    <string name="article_location">Lokasi Kejadian</string>
+    <string name="article_title">Judul Artikel</string>
 </resources>

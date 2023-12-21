@@ -22,46 +22,57 @@
             app:layout_constraintBottom_toTopOf="@+id/frame_text"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:context=".ui.maps.MapsActivity"
-            tools:layout="@layout/activity_maps">
+            app:layout_constraintTop_toTopOf="parent">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
 
                 <FrameLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginStart="55dp"
                     android:layout_marginTop="8dp"
                     android:alpha="0.9"
                     android:background="@drawable/search_frame"
-                    android:backgroundTint="@color/lightest_gray">
+                    android:backgroundTint="@color/white">
 
                     <EditText
                         android:id="@+id/search_bar_edit"
-                        android:layout_width="300dp"
+                        android:layout_width="250dp"
                         android:layout_height="38dp"
                         android:layout_weight="1"
                         android:background="@drawable/search_frame"
                         android:hint="Search Location"
                         android:inputType="textPersonName"
-                        android:textAlignment="center"
+                        android:textAlignment="textStart"
                         android:textColor="@color/black" />
 
                     <ImageView
                         android:id="@+id/search_button"
-                        android:layout_width="38dp"
-                        android:layout_height="38dp"
+                        android:layout_width="35dp"
+                        android:layout_height="35dp"
+                        android:layout_marginTop="2dp"
+                        android:layout_alignParentTop="true"
+                        android:layout_alignParentEnd="true"
                         android:layout_gravity="end"
                         android:background="@drawable/ic_baseline_search_24"
                         android:backgroundTint="@color/light_gray"
-                        android:layout_alignParentEnd="true"
-                        android:layout_alignParentTop="true"
                         android:textColor="@color/white" />
 
                 </FrameLayout>
+
+                <ProgressBar
+                    android:id="@+id/maps_loading"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:visibility="gone" />
 
             </LinearLayout>
 
@@ -89,20 +100,33 @@
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                     android:layout_width="0dp"
                     android:layout_height="50dp"
-                    android:gravity="center|top"
+                    android:gravity="center"
                     android:hint="@string/location"
-                    app:layout_constraintEnd_toStartOf="@+id/destination"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toStartOf="@+id/arrow"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
+                <ImageView
+                    android:id="@+id/arrow"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_baseline_arrow_right_alt_24"
+                    app:layout_constraintStart_toEndOf="@+id/location"
+                    app:layout_constraintEnd_toStartOf="@+id/destination"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"/>
 
                 <TextView
                     android:id="@+id/destination"
                     android:layout_width="0dp"
                     android:layout_height="50dp"
-                    android:gravity="center|top"
+                    android:gravity="center"
                     android:hint="@string/destination"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toEndOf="@+id/location"
+                    app:layout_constraintStart_toEndOf="@+id/arrow"
                     app:layout_constraintTop_toTopOf="parent" />
 
 

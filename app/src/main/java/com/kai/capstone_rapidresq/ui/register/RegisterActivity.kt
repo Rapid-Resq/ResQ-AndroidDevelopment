@@ -1,11 +1,10 @@
 package com.kai.capstone_rapidresq.ui.register
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import com.kai.capstone_rapidresq.MainActivity
-import com.kai.capstone_rapidresq.R
+import androidx.appcompat.app.AppCompatActivity
 import com.kai.capstone_rapidresq.databinding.ActivityRegisterBinding
+import com.kai.capstone_rapidresq.ui.login.LoginActivity
 
 class RegisterActivity : AppCompatActivity() {
 
@@ -17,11 +16,11 @@ class RegisterActivity : AppCompatActivity() {
 
         supportActionBar?.hide()
 
-        binding.btnRegister.setOnClickListener { toMain() }
+        binding.btnRegister.setOnClickListener { toLogin() }
     }
 
-    private fun toMain(){
-        intent = Intent(this, MainActivity::class.java)
+    private fun toLogin(){
+        intent = Intent(this, LoginActivity::class.java)
         startActivity(intent)
     }
 }

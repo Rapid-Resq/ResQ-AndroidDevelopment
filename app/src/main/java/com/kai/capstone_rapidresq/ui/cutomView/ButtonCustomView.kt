@@ -38,7 +38,7 @@ class ButtonCustomView : AppCompatButton {
         setTextColor(txtColor)
         textSize = 13f
         gravity = Gravity.CENTER
-        text = if (isEnabled) "Upload" else "Lengkapi Semua Isian"
+        text = if (isEnabled) "Login" else "Username Kosong"
     }
 
     private fun init() {

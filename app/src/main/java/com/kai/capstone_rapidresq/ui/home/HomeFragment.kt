@@ -1,9 +1,11 @@
 package com.kai.capstone_rapidresq.ui.home
 
 import android.Manifest
+import android.annotation.SuppressLint
+import android.annotation.TargetApi
+import android.app.PendingIntent
+import android.content.Intent
 import android.content.pm.PackageManager
-import android.graphics.Bitmap
-import android.graphics.Canvas
 import android.location.Address
 import android.location.Geocoder
 import android.location.Location
@@ -16,32 +18,43 @@ import android.view.Menu
 import android.view.MenuInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.EditorInfo
 import android.widget.EditText
+import android.widget.ProgressBar
+import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.annotation.ColorInt
-import androidx.annotation.DrawableRes
+import androidx.annotation.RequiresApi
 import androidx.core.content.ContextCompat
-import androidx.core.content.res.ResourcesCompat
-import androidx.core.graphics.drawable.DrawableCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.google.android.gms.common.ConnectionResult
 import com.google.android.gms.common.api.GoogleApiClient
 import com.google.android.gms.location.FusedLocationProviderClient
+import com.google.android.gms.location.Geofence
+import com.google.android.gms.location.GeofencingClient
+import com.google.android.gms.location.GeofencingRequest
 import com.google.android.gms.location.LocationRequest
 import com.google.android.gms.location.LocationServices
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
-import com.google.android.gms.maps.model.BitmapDescriptor
 import com.google.android.gms.maps.model.BitmapDescriptorFactory
+import com.google.android.gms.maps.model.CircleOptions
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
+import com.google.android.gms.maps.model.PolylineOptions
 import com.google.android.libraries.places.api.Places
 import com.google.android.libraries.places.api.net.PlacesClient
+import com.google.maps.DirectionsApi
+import com.google.maps.GeoApiContext
+import com.google.maps.PendingResult
+import com.google.maps.android.PolyUtil
+import com.google.maps.model.DirectionsResult
+import com.google.maps.model.TravelMode
+import com.kai.capstone_rapidresq.BuildConfig
 import com.kai.capstone_rapidresq.R
 import com.kai.capstone_rapidresq.databinding.FragmentHomeBinding
 import java.io.IOException
@@ -59,6 +72,17 @@ class HomeFragment : Fragment(), OnMapReadyCallback, LocationListener,
     internal var mGoogleApiClient: GoogleApiClient? = null
     internal lateinit var mLocationRequest: LocationRequest
     private lateinit var placesClient: PlacesClient
+    private lateinit var geoApiContext: GeoApiContext
+
+    private var userLatitude: Double = 0.0
+    private var userLongitude: Double = 0.0
+
+    private val geofenceLat = -7.792782900507159
+    private val geofenceLong = 110.40569498001508
+    private val saverity = "Tingkat Saverity : "
+    private val geofenceRadius = 50.0
+    private lateinit var geofencingClient: GeofencingClient
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -78,6 +102,7 @@ class HomeFragment : Fragment(), OnMapReadyCallback, LocationListener,
 
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(requireContext())
         getMyLastLocation()
+        geofencingClient = LocationServices.getGeofencingClient(requireContext())
 
         binding.searchButton.setOnClickListener {
             searchLocation()
@@ -89,17 +114,14 @@ class HomeFragment : Fragment(), OnMapReadyCallback, LocationListener,
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-
-
         Places.initialize(requireContext(), "AIzaSyAA55ikwbrSuT49hRqBDVUetEVFHtsL9DM")
         placesClient = Places.createClient(requireContext())
 
         val mapFragment = childFragmentManager.findFragmentById(R.id.maps) as SupportMapFragment
         mapFragment.getMapAsync(this)
-
     }
 
-    protected fun buildGoogleApiClient(){
+    protected fun buildGoogleApiClient() {
         mGoogleApiClient = GoogleApiClient.Builder(requireContext())
             .addConnectionCallbacks(this)
             .addOnConnectionFailedListener(this)
@@ -153,8 +175,18 @@ class HomeFragment : Fragment(), OnMapReadyCallback, LocationListener,
 
     fun searchLocation() {
         val locationSearch: EditText = binding.searchBarEdit
+        locationSearch.setOnEditorActionListener { _, actionId, _ ->
+            if (actionId == EditorInfo.IME_ACTION_SEARCH) {
+                searchLocation()
+                return@setOnEditorActionListener true
+            }
+            false
+        }
+
+        val locationNameTextView: TextView = binding.destination
         val location: String = locationSearch.text.toString().trim()
         var addressList: List<Address>? = null
+        val progressBar : ProgressBar = binding.mapsLoading
 
         if (location == null || location == "") {
             Toast.makeText(requireContext(), "Tentukan Lokasi", Toast.LENGTH_SHORT).show()
@@ -167,91 +199,188 @@ class HomeFragment : Fragment(), OnMapReadyCallback, LocationListener,
             }
             if (addressList != null && addressList.isNotEmpty()) {
                 val address = addressList[0]
-                val latLng = LatLng(address.latitude, address.longitude)
-                mMap.addMarker(MarkerOptions().position(latLng).title(location))
-                mMap.animateCamera(CameraUpdateFactory.newLatLng(latLng))
+                val destinationLatLng = LatLng(address.latitude, address.longitude)
+
+                showRouteToDestination(destinationLatLng)
+
+                mMap.addMarker(MarkerOptions().position(destinationLatLng).title(location))
+                mMap.animateCamera(CameraUpdateFactory.newLatLng(destinationLatLng))
+
+                locationNameTextView.text = address.featureName ?: address.locality
             } else {
-                Toast.makeText(requireContext(), "Lokasi tidak ditemukan", Toast.LENGTH_SHORT).show()
+                Toast.makeText(requireContext(), "Lokasi tidak ditemukan", Toast.LENGTH_SHORT)
+                    .show()
             }
         }
+        progressBar.visibility = View.GONE
     }
 
-    private fun vectorToBitmap(@DrawableRes id: Int, @ColorInt color: Int): BitmapDescriptor {
-        val vectorDrawable = ResourcesCompat.getDrawable(resources, id, null)
-        if (vectorDrawable == null) {
-            Log.e("BitmapHelper", "Resource not found")
-            return BitmapDescriptorFactory.defaultMarker()
-        }
-        val bitmap = Bitmap.createBitmap(
-            vectorDrawable.intrinsicWidth,
-            vectorDrawable.intrinsicHeight,
-            Bitmap.Config.ARGB_8888
-        )
-        val canvas = Canvas(bitmap)
-        vectorDrawable.setBounds(0, 0, canvas.width, canvas.height)
-        DrawableCompat.setTint(vectorDrawable, color)
-        vectorDrawable.draw(canvas)
-        return BitmapDescriptorFactory.fromBitmap(bitmap)
+    fun showRouteToDestination(destinationLatLng: LatLng) {
+
+        val origin = LatLng(userLatitude, userLongitude)
+
+        DirectionsApi.newRequest(geoApiContext)
+            .mode(TravelMode.DRIVING)
+            .origin(origin.latitude.toString() + "," + origin.longitude.toString())
+            .destination(destinationLatLng.latitude.toString() + "," + destinationLatLng.longitude.toString())
+            .setCallback(object : PendingResult.Callback<DirectionsResult> {
+                override fun onResult(result: DirectionsResult) {
+
+                    val route = result.routes[0]
+                    val polyline = route.overviewPolyline
+                    val options = PolylineOptions().addAll(PolyUtil.decode(polyline.encodedPath))
+                    mMap.addPolyline(options)
+                }
+
+                override fun onFailure(e: Throwable) {
+                    Log.e("DirectionsAPI", "Failed to get directions: ${e.message}")
+                }
+            })
     }
 
     override fun onMapReady(googleMap: GoogleMap) {
         mMap = googleMap
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             if (ContextCompat.checkSelfPermission(
                     requireContext(),
                     Manifest.permission.ACCESS_FINE_LOCATION
                 ) == PackageManager.PERMISSION_GRANTED
-            ){
+            ) {
                 buildGoogleApiClient()
                 mMap.isMyLocationEnabled = true
             }
-        }else{
+        } else {
             buildGoogleApiClient()
             mMap.isMyLocationEnabled = true
         }
-        mMap.setOnPoiClickListener { poi ->
-            val poiMarker = mMap.addMarker(
-                MarkerOptions()
-                    .position(poi.latLng)
-                    .title(poi.name)
-                    .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE))
-            )
-            poiMarker?.showInfoWindow()
-        }
-        val defaultLocation = LatLng(-34.0, 151.0)
-        mMap.addMarker(
-            MarkerOptions().position(defaultLocation).title("Marker in Default Location")
-        )
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(defaultLocation))
 
         mMap.uiSettings.isZoomControlsEnabled = true
         mMap.uiSettings.isIndoorLevelPickerEnabled = true
         mMap.uiSettings.isCompassEnabled = true
         mMap.uiSettings.isMapToolbarEnabled = true
 
+        val geoLocation = LatLng(geofenceLat,geofenceLong)
+        mMap.addMarker(MarkerOptions().position(geoLocation).title("GeoLocation"))
+
+        mMap.addCircle(
+            CircleOptions()
+                .center(geoLocation)
+                .radius(geofenceRadius)
+                .fillColor(0x22FF0000)
+                .strokeWidth(3f)
+        )
+
+        val progressBar: ProgressBar = binding.mapsLoading ?:return
+
+        binding.searchButton.setOnClickListener {
+            progressBar.visibility = View.VISIBLE
+
+            searchLocation()
+        }
+
         getMyLocation()
-        requestPermissionLauncher
+        addGeofence()
+        checkAndRequestPermission()
     }
 
-    private val requestPermissionLauncher =
-        registerForActivityResult(
-            ActivityResultContracts.RequestMultiplePermissions()
-        ) { permissions ->
-            when {
-                permissions[Manifest.permission.ACCESS_FINE_LOCATION] ?: false -> {
-                    // Precise location access granted.
-                    getMyLastLocation()
-                }
+    private val geofencePendingIntent: PendingIntent by lazy {
+        val intent = Intent(requireContext(), GeofenceReceiver::class.java)
+        intent.action = GeofenceReceiver.ACTION_GEOFENCE_EVENT
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+            PendingIntent.getBroadcast(requireContext(), 0, intent, PendingIntent.FLAG_MUTABLE)
+        } else {
+            PendingIntent.getBroadcast(requireContext(), 0, intent, PendingIntent.FLAG_UPDATE_CURRENT)
+        }
+    }
 
-                permissions[Manifest.permission.ACCESS_COARSE_LOCATION] ?: false -> {
-                    // Only approximate location access granted.
-                    getMyLastLocation()
-                }
-                else -> {
-                    // No location access granted.
+
+    @SuppressLint("MissingPermission")
+    private fun addGeofence() {
+        geofencingClient = LocationServices.getGeofencingClient(requireContext())
+        val geofence = Geofence.Builder()
+            .setRequestId(saverity)
+            .setCircularRegion(
+                geofenceLat,
+                geofenceLong,
+                geofenceRadius.toFloat()
+            )
+            .setExpirationDuration(Geofence.NEVER_EXPIRE)
+            .setTransitionTypes(Geofence.GEOFENCE_TRANSITION_DWELL or Geofence.GEOFENCE_TRANSITION_ENTER)
+            .setLoiteringDelay(5000)
+            .build()
+        val geofencingRequest = GeofencingRequest.Builder()
+            .setInitialTrigger(GeofencingRequest.INITIAL_TRIGGER_ENTER)
+            .addGeofence(geofence)
+            .build()
+
+        geofencingClient.removeGeofences(geofencePendingIntent).run {
+            addOnCompleteListener {
+                geofencingClient.addGeofences(geofencingRequest, geofencePendingIntent).run {
+                    addOnSuccessListener {
+                        showToast("Geofencing added")
+                    }
+                    addOnFailureListener {
+                        showToast("Geofencing not added : ${it.message}")
+                    }
                 }
             }
         }
+    }
+    private fun showToast(text: String) {
+        Toast.makeText(requireContext(), text, Toast.LENGTH_SHORT).show()
+    }
+
+    private val requestPermissionLauncher =
+        registerForActivityResult(ActivityResultContracts.RequestMultiplePermissions()) { permissions ->
+            if (permissions[Manifest.permission.ACCESS_FINE_LOCATION] == true ||
+                permissions[Manifest.permission.ACCESS_COARSE_LOCATION] == true ||
+                permissions[Manifest.permission.ACCESS_BACKGROUND_LOCATION] == true) {
+                getMyLastLocation()
+            } else {
+                getMyLocation()
+            }
+            if (permissions[Manifest.permission.POST_NOTIFICATIONS] == true) {
+                Toast.makeText(requireContext(), "Notifications permission granted", Toast.LENGTH_SHORT).show()
+            } else {
+                Toast.makeText(requireContext(), "Notifications permission rejected", Toast.LENGTH_SHORT).show()
+            }
+        }
+
+
+    private fun checkAndRequestPermission() {
+        val permissionsToRequest = mutableListOf<String>()
+
+        if (!checkPermission(Manifest.permission.ACCESS_FINE_LOCATION)) {
+            permissionsToRequest.add(Manifest.permission.ACCESS_FINE_LOCATION)
+        }
+
+        if (!checkPermission(Manifest.permission.ACCESS_COARSE_LOCATION)) {
+            permissionsToRequest.add(Manifest.permission.ACCESS_COARSE_LOCATION)
+        }
+
+        if (!checkPermission(Manifest.permission.POST_NOTIFICATIONS)) {
+            permissionsToRequest.add(Manifest.permission.POST_NOTIFICATIONS)
+        }
+
+        if (permissionsToRequest.isNotEmpty()) {
+            requestPermissionLauncher.launch(permissionsToRequest.toTypedArray())
+        } else {
+            getMyLocation()
+        }
+    }
+    private val runningQOrLater = Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q
+    @RequiresApi(Build.VERSION_CODES.Q)
+    @TargetApi(Build.VERSION_CODES.Q)
+    private fun checkLocationPermissions(): Boolean {
+        val foregroundLocationApproved = checkPermission(Manifest.permission.ACCESS_FINE_LOCATION)
+        val backgroundPermissionApproved =
+            if (runningQOrLater) {
+                checkPermission(Manifest.permission.ACCESS_BACKGROUND_LOCATION)
+            } else {
+                true
+            }
+        return foregroundLocationApproved && backgroundPermissionApproved
+    }
 
     private fun checkPermission(permission: String): Boolean {
         return ContextCompat.checkSelfPermission(
@@ -262,38 +391,31 @@ class HomeFragment : Fragment(), OnMapReadyCallback, LocationListener,
 
     private fun getMyLastLocation() {
         if (checkPermission(Manifest.permission.ACCESS_FINE_LOCATION) &&
-            checkPermission(Manifest.permission.ACCESS_COARSE_LOCATION)
+            checkPermission(Manifest.permission.ACCESS_COARSE_LOCATION) &&
+            checkPermission(Manifest.permission.ACCESS_BACKGROUND_LOCATION)
         ) {
-            fusedLocationClient.lastLocation.addOnSuccessListener { location: Location? ->
-                if (location != null) {
-                    showStartMarker(location)
-                } else {
-                    Toast.makeText(
-                        requireContext(),
-                        "Location is not found. Try Again",
-                        Toast.LENGTH_SHORT
-                    ).show()
+            fusedLocationClient.lastLocation
+                .addOnSuccessListener { location: Location? ->
+                    if (location != null) {
+                        val userLatitude = location.latitude
+                        val userLongitude = location.longitude
+                        val userLatLng = LatLng(userLatitude, userLongitude)
+
+                        mMap.moveCamera(CameraUpdateFactory.newLatLng(userLatLng))
+                        mMap.animateCamera(CameraUpdateFactory.zoomTo(15.0f))
+                    }
                 }
-            }
         } else {
             requestPermissionLauncher.launch(
                 arrayOf(
                     Manifest.permission.ACCESS_FINE_LOCATION,
-                    Manifest.permission.ACCESS_COARSE_LOCATION
+                    Manifest.permission.ACCESS_COARSE_LOCATION,
+                    Manifest.permission.ACCESS_BACKGROUND_LOCATION
                 )
             )
         }
     }
 
-    private fun showStartMarker(location: Location) {
-        val startLocation = LatLng(location.latitude, location.longitude)
-        mMap.addMarker(
-            MarkerOptions()
-                .position(startLocation)
-                .title(getString(R.string.start_point))
-        )
-        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(startLocation, 17f))
-    }
 
     @Suppress("DEPRECATION")
     private fun getMyLocation() {
@@ -340,6 +462,13 @@ class HomeFragment : Fragment(), OnMapReadyCallback, LocationListener,
     @Suppress("DEPRECATION")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        val apiKey = BuildConfig.MAPS_API_KEY
+
+        geoApiContext = GeoApiContext.Builder()
+            .apiKey(apiKey)
+            .build()
+
         setHasOptionsMenu(true)
     }
 

@@ -13,19 +13,19 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:paddingBottom="20dp"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:paddingBottom="20dp">
 
             <FrameLayout
                 android:id="@+id/frame_photo"
                 android:layout_width="match_parent"
                 android:layout_height="175dp"
+                android:alpha="0.8"
                 android:background="@drawable/frame_gradient"
+                android:elevation="4dp"
                 app:layout_constraintBottom_toTopOf="@+id/frame_profile"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                android:elevation="4dp"
-                android:alpha="0.8"
                 app:layout_constraintTop_toTopOf="parent">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
@@ -94,7 +94,9 @@
                         android:background="@drawable/text_frame"
                         android:backgroundTint="@color/lightest_gray"
                         android:gravity="start|center"
-                        android:text="@string/birt_date"
+                        android:hint="@string/birt_date"
+                        android:textAlignment="center"
+                        android:textColor="@color/quantum_grey"
                         app:layout_constraintEnd_toStartOf="@+id/tv_gender"
                         app:layout_constraintStart_toStartOf="parent"
                         tools:ignore="MissingConstraints" />
@@ -110,6 +112,8 @@
                         android:backgroundTint="@color/lightest_gray"
                         android:gravity="start|center"
                         android:text="@string/address"
+                        android:textAlignment="center"
+                        android:textColor="@color/quantum_grey"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/tv_birth_date"
@@ -123,10 +127,12 @@
                         android:layout_marginStart="5dp"
                         android:layout_marginTop="20dp"
                         android:layout_marginEnd="5dp"
-                        android:gravity="start|center"
-                        android:text="@string/gender"
                         android:background="@drawable/text_frame"
                         android:backgroundTint="@color/lightest_gray"
+                        android:gravity="start|center"
+                        android:text="@string/gender"
+                        android:textAlignment="center"
+                        android:textColor="@color/quantum_grey"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toEndOf="@id/tv_birth_date"
                         tools:alpha="100"
@@ -139,10 +145,12 @@
                         android:layout_marginStart="5dp"
                         android:layout_marginTop="20dp"
                         android:layout_marginEnd="5dp"
-                        android:gravity="start|center"
                         android:background="@drawable/text_frame"
                         android:backgroundTint="@color/lightest_gray"
+                        android:gravity="start|center"
                         android:text="@string/work"
+                        android:textAlignment="center"
+                        android:textColor="@color/quantum_grey"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/tv_address"
@@ -159,8 +167,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
                 android:background="@drawable/frame"
-                android:elevation="4dp"
                 android:backgroundTint="@color/white"
+                android:elevation="4dp"
                 android:paddingTop="12dp"
                 android:paddingBottom="12dp"
                 app:layout_constraintTop_toBottomOf="@+id/frame_profile">
@@ -176,10 +184,12 @@
                         android:layout_marginStart="5dp"
                         android:layout_marginTop="20dp"
                         android:layout_marginEnd="5dp"
-                        android:gravity="start|center"
-                        android:text="@string/email"
                         android:background="@drawable/text_frame"
                         android:backgroundTint="@color/lightest_gray"
+                        android:gravity="start|center"
+                        android:text="@string/email"
+                        android:textAlignment="center"
+                        android:textColor="@color/quantum_grey"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         tools:alpha="100"
@@ -192,10 +202,12 @@
                         android:layout_marginStart="5dp"
                         android:layout_marginTop="20dp"
                         android:layout_marginEnd="5dp"
-                        android:gravity="start|center"
-                        android:text="@string/phone_number"
                         android:background="@drawable/text_frame"
                         android:backgroundTint="@color/lightest_gray"
+                        android:gravity="start|center"
+                        android:text="@string/phone_number"
+                        android:textAlignment="center"
+                        android:textColor="@color/quantum_grey"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/tv_email"
@@ -229,10 +241,12 @@
                         android:layout_marginStart="5dp"
                         android:layout_marginTop="20dp"
                         android:layout_marginEnd="5dp"
-                        android:gravity="start|center"
                         android:background="@drawable/text_frame"
                         android:backgroundTint="@color/lightest_gray"
+                        android:gravity="start|center"
                         android:text="@string/bpjs"
+                        android:textAlignment="center"
+                        android:textColor="@color/quantum_grey"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/tv_ktp"
@@ -246,10 +260,12 @@
                         android:layout_marginStart="5dp"
                         android:layout_marginTop="20dp"
                         android:layout_marginEnd="5dp"
-                        android:gravity="start|center"
                         android:background="@drawable/text_frame"
                         android:backgroundTint="@color/lightest_gray"
+                        android:gravity="start|center"
                         android:text="@string/noKtp"
+                        android:textAlignment="center"
+                        android:textColor="@color/quantum_grey"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         tools:alpha="100"
@@ -263,13 +279,13 @@
 
     </ScrollView>
 
-<!--    <ProgressBar-->
-<!--        android:id="@+id/progressBar"-->
-<!--        style="?android:attr/progressBarStyle"-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:layout_gravity="center"-->
-<!--        android:visibility="gone"/>-->
+    <!--    <ProgressBar-->
+    <!--        android:id="@+id/progressBar"-->
+    <!--        style="?android:attr/progressBarStyle"-->
+    <!--        android:layout_width="wrap_content"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:layout_gravity="center"-->
+    <!--        android:visibility="gone"/>-->
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/btn_update"
@@ -277,10 +293,10 @@
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
         android:layout_margin="16dp"
+        android:alpha="0.8"
         android:background="@drawable/frame"
         android:backgroundTint="@color/light_blue"
         android:gravity="center"
-        android:alpha="0.8"
-        android:src="@drawable/ic_baseline_create_24"/>
+        android:src="@drawable/ic_baseline_create_24" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

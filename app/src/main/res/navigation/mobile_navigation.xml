@@ -28,9 +28,6 @@
         android:name="com.kai.capstone_rapidresq.ui.article.ArticleFragment"
         android:label="@string/article"
         tools:layout="@layout/fragment_article">
-        <action
-            android:id="@+id/action_navigation_article_to_detailArticleFragment"
-            app:destination="@id/detailArticleFragment" />
     </fragment>
 
     <fragment
@@ -38,9 +35,4 @@
         android:name="com.kai.capstone_rapidresq.ui.profiles.ProfileFragment"
         android:label="@string/title_profile"
         tools:layout="@layout/fragment_profile" />
-    <fragment
-        android:id="@+id/detailArticleFragment"
-        android:name="com.kai.capstone_rapidresq.ui.detail.DetailArticleFragment"
-        android:label="fragment_detail_article"
-        tools:layout="@layout/fragment_detail_article" />
 </navigation>

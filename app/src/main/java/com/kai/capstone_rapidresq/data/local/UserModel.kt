@@ -1,4 +1,7 @@
 package com.kai.capstone_rapidresq.data.local
 
-class UserModel {
-}
+data class UserModel(
+    val email: String,
+    val token: String,
+    val isLogin: Boolean = false
+)
