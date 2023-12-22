@@ -77,8 +77,8 @@ class HomeFragment : Fragment(), OnMapReadyCallback, LocationListener,
     private var userLatitude: Double = 0.0
     private var userLongitude: Double = 0.0
 
-    private val geofenceLat = -7.792782900507159
-    private val geofenceLong = 110.40569498001508
+    private val geofenceLat = -7.8059826
+    private val geofenceLong = 110.4124334
     private val saverity = "Tingkat Saverity : "
     private val geofenceRadius = 500.0
     private lateinit var geofencingClient: GeofencingClient

@@ -58,8 +58,13 @@ class AddFragment : Fragment() {
 
         binding.btnCamera.setOnClickListener { startCamera() }
         binding.btnGallery.setOnClickListener { startGallery() }
+        binding.btnUpload.setOnClickListener { showToast("Laporan dikirim, harap menunggu ambulance untuk datang ke lokasi") }
 
         return root
+    }
+
+    private fun showToast(text: String) {
+        Toast.makeText(requireContext(), text, Toast.LENGTH_LONG).show()
     }
 
     private val launchGallery = registerForActivityResult(
